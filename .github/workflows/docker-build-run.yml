@@ -1,4 +1,4 @@
-name: Build and Run Juice Shop with Docker and Generate SBOM
+name: Build, Run Juice Shop, Generate SBOM, and Scan with Semgrep
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-run:
+  build-run-sbom-semgrep:
     runs-on: ubuntu-latest
 
     steps:
@@ -50,3 +50,11 @@ jobs:
       with:
         name: sbom-json
         path: sbom.json
+
+    - name: Install Semgrep
+      run: |
+        curl -sL https://semgrep.dev/install.sh | sh
+
+    - name: Run Semgrep SAST Scan
+      run: |
+        ./semgrep scan --config auto --error
