@@ -1,4 +1,4 @@
-name: Build and Run Juice Shop with Docker
+name: Build and Run Juice Shop with Docker and Generate SBOM
 
 on:
   push:
@@ -37,6 +37,16 @@ jobs:
       run: |
         curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
 
-    - name: Generate SBOM with Syft
+    - name: Generate SBOM as JSON with Syft
       run: |
-        syft juice-shop -o table
+        syft juice-shop -o json > sbom.json
+
+    - name: Display SBOM JSON output
+      run: |
+        cat sbom.json
+
+    - name: Upload SBOM artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: sbom-json
+        path: sbom.json
