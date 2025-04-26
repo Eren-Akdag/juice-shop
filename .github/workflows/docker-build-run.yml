@@ -1,4 +1,4 @@
-name: Build, Run Juice Shop, Generate SBOM, Scan with Semgrep, and Detect Secrets with Gitleaks
+name: Build, Run Juice Shop, Generate SBOM, Scan with Semgrep, Detect Secrets with Gitleaks, and Dummy Deploy
 
 on:
   push:
@@ -75,3 +75,7 @@ jobs:
       with:
         name: gitleaks-sarif-results
         path: gitleaks-results.sarif
+
+    - name: Dummy Deploy Step
+      run: |
+        echo "Deploying Juice Shop... (Dummy Deploy Step Executed)"
