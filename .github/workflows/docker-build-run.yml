@@ -53,7 +53,7 @@ jobs:
 
     - name: Install Semgrep
       run: |
-        curl -sL https://semgrep.dev/install.sh | sh
+        curl -sL https://semgrep.dev/install.sh | bash
 
     - name: Run Semgrep SAST Scan and Generate SARIF
       run: |
