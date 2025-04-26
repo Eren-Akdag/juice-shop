@@ -65,17 +65,13 @@ jobs:
         name: semgrep-sarif-results
         path: semgrep-results.sarif
 
-    - name: Install Gitleaks
-      run: |
-        curl -sSfL https://raw.githubusercontent.com/gitleaks/gitleaks/main/install.sh | bash
-
     - name: Run Gitleaks Scan (SARIF)
-      run: |
-        mkdir -p gitleaks-results
-        ./gitleaks detect --source . --report-format sarif --report-path gitleaks-results/gitleaks.sarif
+      uses: gitleaks/gitleaks-action@v2
+      with:
+        args: detect --source . --report-format sarif --report-path gitleaks-results.sarif
 
     - name: Upload Gitleaks Results (SARIF)
       uses: actions/upload-artifact@v4
       with:
         name: gitleaks-sarif-results
-        path: gitleaks-results/gitleaks.sarif
+        path: gitleaks-results.sarif
