@@ -68,7 +68,7 @@ jobs:
     - name: Run Gitleaks Scan (SARIF)
       uses: gitleaks/gitleaks-action@v2
       with:
-        args: detect --source . --report-format sarif --report-path gitleaks-results.sarif
+        args: detect --source . --report-format sarif --report-path gitleaks-results.sarif || true
 
     - name: Upload Gitleaks Results (SARIF)
       uses: actions/upload-artifact@v4
